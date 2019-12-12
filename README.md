@@ -1,6 +1,6 @@
 # Python Craigslist Notifications
 
-A simple, self-hosted, python daemon to scan craigslist and notify you of new listings
+A simple, self-hosted, python daemon to scan craigslist and notify you of new listings via IFTTT
 
 Main components used
 
