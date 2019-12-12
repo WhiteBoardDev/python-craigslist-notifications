@@ -1,0 +1,18 @@
+{
+  "run_every_in_minutes": 20,
+  "database_file":"/path/to/some/json/file/database.json",
+  "ifttt_webhook_url" : "https://maker.ifttt.com/trigger/{eventname}/with/key/{yourprivatekey}",
+  "scans" : {
+    "for_sale": [
+      {
+        "sites": [
+          "seattle",
+          "portland"
+        ],
+        "filters": {
+          "query": "something cool"
+        }
+      }
+    ]
+  }
+}

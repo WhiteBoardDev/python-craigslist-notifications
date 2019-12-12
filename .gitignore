@@ -1,0 +1,6 @@
+.idea
+dist
+config.json
+venv
+python_craigslist_notifications.egg-info
+database.json
