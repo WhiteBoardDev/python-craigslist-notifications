@@ -1,9 +1,16 @@
-FROM python:3.7-buster
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+FROM python:3.8-buster
+
+RUN mkdir /app
+WORKDIR /app
+
+RUN apt-get update
+RUN apt-get install -y pipenv
 # Assuming you have placed the config file as config.json
 COPY config.json ./
+COPY Pipfile.lock Pipfile.lock
+COPY Pipfile Pipfile
 COPY python_craigslist_notifications python_craigslist_notifications
-COPY pyproject.toml ./
-RUN $HOME/.poetry/bin/poetry install
 
-ENTRYPOINT $HOME/.poetry/bin/poetry run python python_craigslist_notifications/main.py config.json
+RUN pipenv install  --deploy
+
+ENTRYPOINT pipenv run python python_craigslist_notifications/main.py config.json

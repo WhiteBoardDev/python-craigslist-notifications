@@ -10,8 +10,7 @@ Main components used
 
 ## Getting up and running
 
-This app uses Poetry for dependency management and packaging. Make sure to have that installed first
-[Poetry](https://python-poetry.org/docs/)
+This app uses `pipenv` to manage dependencies. Install it and run `pipenv install` to get up and running
 
 ### IFTTT Config
 
@@ -29,14 +28,7 @@ it as `config.json` and set your own search values.
 
 ### Running
 
-Launch the app with
-
-    poetry install
-    poetry run python_craigslist_notifications/main.py config.json
-
-## Pycharm support for Poetry
-
-See [This Issue](https://youtrack.jetbrains.com/issue/PY-30702) which contains steps to setup in pycharm
+    pipenv run python python_craigslist_notifications/main.py config.json
 
 ## Docker
 

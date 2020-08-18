@@ -31,7 +31,7 @@ def search():
         print('Scanning ForSale')
         print(search_config)
         for site in search_config['sites']:
-            craigslist_query = CraigslistForSale(site=site, filters=search_config['filters'])
+            craigslist_query = CraigslistForSale(site=site, category=search_config['category'], filters=search_config['filters'])
             for result in craigslist_query.get_results(sort_by='newest', limit=50):
                 print('Web Result')
                 print(result)
@@ -42,15 +42,23 @@ def search():
                     pending_notifications_table.insert(result)
 
 
+max_notifications_per_run = 10
+
 def notify():
+    notifications_sent=0
     for notification in pending_notifications_table.all():
+        if(notifications_sent >= max_notifications_per_run):
+            print('Max notifications per run met')
+            return
         print('Sending Notification')
         print(notification)
-        requests.post(url=config['ifttt_webhook_url'],
+        result = requests.post(url=config['ifttt_webhook_url'],
                       json={'value1': notification['name'] + ' ' + str(notification['price']) + ' ' + str(notification['where']),
                             'value2': notification['url']},
                       headers={'Content-Type': 'application/json'})
+        print(result.status_code)
         pending_notifications_table.remove(doc_ids=[notification.doc_id])
+        notifications_sent += 1
 
 
 def job():
